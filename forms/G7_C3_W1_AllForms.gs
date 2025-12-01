@@ -22,11 +22,11 @@
  *   4. Connect bond energy concepts to the greenhouse effect
  *
  * FORMS:
- *   1. Hook - The Hot Car Mystery (15 pts, ~10 min)
+ *   1. Hook - The Hot Car Mystery (12 pts + diagnostic, ~10 min)
  *   2. Station 1 - Molecular Vibration & IR (20 pts, ~18 min)
  *   3. Station 2 - Carbon Cycle Conservation (20 pts, ~15 min)
  *   4. Station 3 - Design a Thermal Trap (25 pts, ~20 min)
- *   5. Exit Ticket - Chemistry & Climate (20 pts, ~15 min)
+ *   5. Exit Ticket - Chemistry & Climate (23 pts, ~15 min) - includes SEP-1 question generator
  *
  * DEPLOYMENT:
  *   1. Open script.google.com, create new project
@@ -70,8 +70,9 @@ function createAllG7C3W1Forms() {
 }
 
 // ============================================================================
-// HOOK - THE HOT CAR MYSTERY (15 points, ~10 min)
+// HOOK - THE HOT CAR MYSTERY (12 points + diagnostic, ~10 min)
 // Prior knowledge activation + predictions
+// Confidence item is 0-point diagnostic for student self-reflection
 // ============================================================================
 
 function createG7Hook_() {
@@ -86,7 +87,7 @@ function createG7Hook_() {
     'The car is not generating any heat. It is just sitting there.\n' +
     'So where is all this extra heat coming from?\n\n' +
     '---\n' +
-    'Time: About 10 minutes | Points: 15\n' +
+    'Time: About 10 minutes | Points: 12 (+ 1 self-reflection question)\n' +
     'Use what you learned in Cycle 2 about energy and reactions!'
   );
 
@@ -194,16 +195,17 @@ function createG7Hook_() {
       .build()
   );
 
-  // Q5: Confidence (3 pts auto)
-  const q5 = form.addScaleItem()
-    .setTitle('How confident are you in your explanation of why cars get hot inside?')
-    .setHelpText('Be honest - this helps us know where to focus learning!')
+  // Q5: Confidence (0 pts - diagnostic only)
+  // NOTE: Confidence items do NOT measure content mastery, so they are 0-point
+  form.addScaleItem()
+    .setTitle('Self-Assessment: How confident are you in your explanation of why cars get hot inside?')
+    .setHelpText('FOR REFLECTION ONLY - This does NOT affect your grade. Be honest!')
     .setBounds(1, 5)
-    .setLabels('Just guessing', 'Very confident')
+    .setLabels('Still learning', 'Got it!')
     .setRequired(true);
-  q5.setPoints(3);
+  // NO setPoints() - purely diagnostic
 
-  logFormInfo_(form, 'G7 Hook', 15);
+  logFormInfo_(form, 'G7 Hook', 12);
   return form;
 }
 
@@ -698,8 +700,8 @@ function createG7Station3_() {
 }
 
 // ============================================================================
-// EXIT TICKET - CHEMISTRY & CLIMATE (20 points, ~15 min)
-// 2 NEW + 2 SPIRAL + 1 INTEGRATION
+// EXIT TICKET - CHEMISTRY & CLIMATE (23 points, ~15 min)
+// 2 NEW + 2 SPIRAL + 1 INTEGRATION + 1 SEP-1 (question generator)
 // ============================================================================
 
 function createG7ExitTicket_() {
@@ -709,11 +711,12 @@ function createG7ExitTicket_() {
     'EXIT TICKET: SHOW WHAT YOU LEARNED\n\n' +
     'This tests whether you can connect Cycle 2 chemistry to climate science.\n\n' +
     '---\n' +
-    'Time: About 15 minutes | Points: 20\n\n' +
+    'Time: About 15 minutes | Points: 23\n\n' +
     'QUESTION TYPES:\n' +
     '- 2 NEW questions (Cycle 3 content)\n' +
     '- 2 SPIRAL questions (Cycle 2 review)\n' +
-    '- 1 INTEGRATION question (connects both cycles)'
+    '- 1 INTEGRATION question (connects both cycles)\n' +
+    '- 1 SEP-1 question (generate your own scientific questions)'
   );
 
   // Quiz and response settings
@@ -870,7 +873,39 @@ function createG7ExitTicket_() {
     .setHelpText('Can atoms be destroyed? If not, where could the carbon go instead?')
     .setRequired(true);
 
-  logFormInfo_(form, 'G7 Exit Ticket', 20);
+  // --- SEP-1: ASKING QUESTIONS ---
+  form.addPageBreakItem()
+    .setTitle('SEP-1: Generate Scientific Questions (Question 6)')
+    .setHelpText(
+      'NGSS Practice: Asking Questions\n' +
+      'Good scientists always have MORE questions after learning something new!'
+    );
+
+  form.addSectionHeaderItem()
+    .setTitle('Question 6: Generate Scientific Questions (3 points)')
+    .setHelpText(
+      'RUBRIC - SEP-1: Asking Questions\n' +
+      '3 pts: 2 testable HOW/WHY questions with specific variables\n' +
+      '2 pts: 2 questions, at least 1 testable\n' +
+      '1 pt: 1 question OR yes/no style questions\n' +
+      '0 pts: No response'
+    );
+
+  form.addParagraphTextItem()
+    .setTitle(
+      'Write 2 scientific questions you still have about the greenhouse effect or carbon cycle.\n\n' +
+      'Requirements:\n' +
+      '- Start with HOW or WHY (not yes/no questions)\n' +
+      '- Include specific variables that could be tested'
+    )
+    .setHelpText(
+      'EXAMPLES of good scientific questions:\n' +
+      '- "How would the greenhouse effect change if CO2 molecules had 4 atoms instead of 3?"\n' +
+      '- "Why do some molecules absorb IR while others do not?"'
+    )
+    .setRequired(true);
+
+  logFormInfo_(form, 'G7 Exit Ticket', 23);
   return form;
 }
 

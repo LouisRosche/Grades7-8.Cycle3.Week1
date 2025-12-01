@@ -5,11 +5,11 @@
  * ============================================================================
  *
  * FORMS CREATED:
- *   1. Hook - The Cheetah-Gazelle Mystery (15 pts)
+ *   1. Hook - The Cheetah-Gazelle Mystery (12 pts) - confidence is 0-pt diagnostic
  *   2. Station 1 - Predator-Prey Force Analysis (20 pts)
- *   3. Station 2 - Trait Variation Simulation (20 pts)
+ *   3. Station 2 - Trait Variation Simulation (21 pts) - includes Lamarckian misconception check
  *   4. Station 3 - Design a Survivor (25 pts)
- *   5. Exit Ticket - Forces & Evolution (20 pts)
+ *   5. Exit Ticket - Forces & Evolution (22 pts) - includes SEP-1 question generator
  *
  * DEPLOYMENT:
  *   1. Open script.google.com, create new project
@@ -56,7 +56,8 @@ function createAllG8C3W1Forms() {
 }
 
 // ============================================================================
-// FORM 1: HOOK - THE CHEETAH-GAZELLE MYSTERY (15 points)
+// FORM 1: HOOK - THE CHEETAH-GAZELLE MYSTERY (12 points + diagnostic)
+// Confidence item is 0-point diagnostic for student self-reflection
 // ============================================================================
 
 function createG8Hook_() {
@@ -69,7 +70,7 @@ function createG8Hook_() {
     'If cheetahs are faster, why have gazelles not gone extinct?\n\n' +
     '---\n' +
     'Time: About 10 minutes\n' +
-    'Points: 15 total\n' +
+    'Points: 12 total (+ 1 self-reflection question)\n' +
     'Tip: Use what you learned about forces in Cycle 2!'
   );
 
@@ -180,16 +181,17 @@ function createG8Hook_() {
       .build()
   );
 
-  // Q5: Confidence (3 pts)
-  const q5 = form.addScaleItem()
-    .setTitle('How confident are you in explaining forces in predator-prey interactions?')
-    .setHelpText('Be honest - this helps us know where to focus!')
+  // Q5: Confidence (0 pts - diagnostic only)
+  // NOTE: Confidence items do NOT measure content mastery, so they are 0-point
+  form.addScaleItem()
+    .setTitle('Self-Assessment: How confident are you in explaining forces in predator-prey interactions?')
+    .setHelpText('FOR REFLECTION ONLY - This does NOT affect your grade. Be honest!')
     .setBounds(1, 5)
-    .setLabels('1 = Just guessing', '5 = Very confident')
+    .setLabels('Still learning', 'Got it!')
     .setRequired(true);
-  q5.setPoints(3);
+  // NO setPoints() - purely diagnostic
 
-  logFormInfo_(form, 'G8 Hook', 15);
+  logFormInfo_(form, 'G8 Hook', 12);
   return form;
 }
 
@@ -377,7 +379,8 @@ function createG8Station1_() {
 }
 
 // ============================================================================
-// FORM 3: STATION 2 - TRAIT VARIATION SIMULATION (20 points)
+// FORM 3: STATION 2 - TRAIT VARIATION SIMULATION (21 points)
+// Includes Lamarckian misconception check (anti-misconception MCQ)
 // ============================================================================
 
 function createG8Station2_() {
@@ -388,14 +391,15 @@ function createG8Station2_() {
     'Use a bean simulation to model how trait variation affects survival.\n' +
     'Different colored beans represent prey with different camouflage traits.\n\n' +
     '---\n' +
-    'Time: About 15 minutes\n' +
-    'Points: 20 total\n\n' +
+    'Time: About 18 minutes\n' +
+    'Points: 21 total\n\n' +
     'SIMULATION RULES:\n' +
     '- Scatter beans on a background\n' +
     '- Hunt (grab beans) for 10 seconds\n' +
     '- Count survivors by color\n' +
     '- Survivors reproduce (add more of that color)\n' +
-    '- Repeat for 3+ generations'
+    '- Repeat for 3+ generations\n\n' +
+    'CRITICAL: Remember - POPULATIONS change over generations, NOT individuals!'
   );
 
   // Quiz and response settings
@@ -491,29 +495,68 @@ function createG8Station2_() {
     .setHelpText('Think about what changed in your bean population over generations...')
     .setRequired(true);
 
-  // Q5: Prediction (4 pts - manual)
+  // Q5: Lamarckian Misconception Check (4 pts - auto) - NEW ADDITION
   form.addSectionHeaderItem()
-    .setTitle('Question 5: New Environment Prediction (4 points)')
+    .setTitle('Question 5: Misconception Check (4 points)')
     .setHelpText(
-      'MANUAL GRADING - 4 points\n' +
-      '4 pts: Specific prediction + clear reasoning based on simulation\n' +
-      '3 pts: Prediction with partial reasoning\n' +
-      '2 pts: Prediction without clear reasoning\n' +
-      '1 pt: Vague prediction\n' +
-      '0 pts: No response'
+      'AUTO-GRADED - 4 points\n' +
+      'This question checks for a common misconception about evolution.'
+    );
+
+  var q5 = form.addMultipleChoiceItem()
+    .setTitle(
+      'After 10 generations of predation in your simulation, which statement is SCIENTIFICALLY ACCURATE?'
+    )
+    .setHelpText('Think carefully about WHO or WHAT changes during natural selection.')
+    .setRequired(true);
+
+  q5.setChoices([
+    q5.createChoice('The population now contains more individuals with survival-enhancing traits', true),
+    q5.createChoice('Individual prey animals changed their traits to survive better', false),
+    q5.createChoice('Prey animals taught their offspring how to escape', false),
+    q5.createChoice('Predators evolved to be slower so prey could escape', false)
+  ]);
+  // NOTE: Shuffle choices manually in Forms UI (setShuffleOrder not available in API)
+  q5.setPoints(4);
+  q5.setFeedbackForCorrect(
+    FormApp.createFeedback()
+      .setText(
+        'Correct! POPULATIONS change over generations through natural selection. ' +
+        'Individual organisms do NOT change their inherited traits during their lifetime. ' +
+        'This is a key distinction from Lamarckian (incorrect) thinking.'
+      )
+      .build()
+  );
+  q5.setFeedbackForIncorrect(
+    FormApp.createFeedback()
+      .setText(
+        'Common misconception! Individual organisms CANNOT change their genes during their lifetime. ' +
+        'Natural selection changes POPULATION trait frequencies over time - ' +
+        'individuals with better traits survive more and reproduce more, ' +
+        'so the next generation has more of those traits.'
+      )
+      .build()
+  );
+
+  // Q6: Prediction (1 pt - manual) - RENUMBERED
+  form.addSectionHeaderItem()
+    .setTitle('Question 6: New Environment Prediction (1 point)')
+    .setHelpText(
+      'MANUAL GRADING - 1 point\n' +
+      '1 pt: Any reasonable prediction with explanation\n' +
+      '0 pts: No response or no explanation'
     );
 
   form.addParagraphTextItem()
-    .setTitle('If the environment changed (for example, a different colored background), predict how the trait frequency would shift over 5 generations.\n\nExplain your reasoning.')
+    .setTitle('If the environment changed (for example, a different colored background), predict how the trait frequency would shift over 5 generations.\n\nExplain your reasoning briefly.')
     .setHelpText(
       'Think about:\n' +
       '- Which color would now be hardest to see?\n' +
-      '- How would survival rates change?\n' +
-      '- What would happen to the population over time?'
+      '- How would survival rates change?'
     )
     .setRequired(true);
 
-  logFormInfo_(form, 'G8 Station 2', 20);
+  logFormInfo_(form, 'G8 Station 2', 21);
   return form;
 }
 
@@ -696,7 +739,8 @@ function createG8Station3_() {
 }
 
 // ============================================================================
-// FORM 5: EXIT TICKET - FORCES & EVOLUTION (20 points)
+// FORM 5: EXIT TICKET - FORCES & EVOLUTION (22 points)
+// 2 NEW + 2 SPIRAL + 1 INTEGRATION + 1 SEP-1 (question generator)
 // ============================================================================
 
 function createG8ExitTicket_() {
@@ -707,11 +751,12 @@ function createG8ExitTicket_() {
     'Show you can apply Cycle 2 physics to understand natural selection.\n\n' +
     '---\n' +
     'Time: About 15 minutes\n' +
-    'Points: 20 total\n\n' +
+    'Points: 22 total\n\n' +
     'QUESTION TYPES:\n' +
     '- 2 NEW questions (Cycle 3 natural selection)\n' +
     '- 2 SPIRAL questions (Cycle 2 forces)\n' +
-    '- 1 INTEGRATION question (connects both cycles)'
+    '- 1 INTEGRATION question (connects both cycles)\n' +
+    '- 1 SEP-1 question (generate your own scientific questions)'
   );
 
   // Quiz and response settings
@@ -846,15 +891,14 @@ function createG8ExitTicket_() {
     .setTitle('INTEGRATION (Question 5)')
     .setHelpText('This question requires knowledge from BOTH Cycle 2 AND Cycle 3.');
 
-  // Q5: Integration (4 pts - manual)
+  // Q5: Integration (3 pts - manual)
   form.addSectionHeaderItem()
-    .setTitle('Question 5: INTEGRATION (4 points)')
+    .setTitle('Question 5: INTEGRATION (3 points)')
     .setHelpText(
-      'MANUAL GRADING - 4 points (3D Assessment)\n' +
-      '4 pts: Natural selection mechanism + physics concepts + prediction over time\n' +
-      '3 pts: Selection + physics OR detailed prediction\n' +
-      '2 pts: One concept applied well\n' +
-      '1 pt: Vague or Lamarckian thinking (individuals change)\n' +
+      'MANUAL GRADING - 3 points (3D Assessment)\n' +
+      '3 pts: Natural selection mechanism + physics concepts + prediction over time\n' +
+      '2 pts: Selection + physics OR detailed prediction\n' +
+      '1 pt: One concept applied OR Lamarckian thinking (individuals change)\n' +
       '0 pts: No response\n\n' +
       '3D Scoring:\n' +
       '- SEP: Does response use evidence-based prediction?\n' +
@@ -883,7 +927,39 @@ function createG8ExitTicket_() {
       .requireTextLengthGreaterThanOrEqualTo(80)
       .build());
 
-  logFormInfo_(form, 'G8 Exit Ticket', 20);
+  // --- SEP-1: ASKING QUESTIONS ---
+  form.addPageBreakItem()
+    .setTitle('SEP-1: Generate Scientific Questions (Question 6)')
+    .setHelpText(
+      'NGSS Practice: Asking Questions\n' +
+      'Good scientists always have MORE questions after learning something new!'
+    );
+
+  form.addSectionHeaderItem()
+    .setTitle('Question 6: Generate Scientific Questions (3 points)')
+    .setHelpText(
+      'RUBRIC - SEP-1: Asking Questions\n' +
+      '3 pts: 2 testable HOW/WHY questions with specific variables\n' +
+      '2 pts: 2 questions, at least 1 testable\n' +
+      '1 pt: 1 question OR yes/no style questions\n' +
+      '0 pts: No response'
+    );
+
+  form.addParagraphTextItem()
+    .setTitle(
+      'Write 2 scientific questions you still have about natural selection or predator-prey physics.\n\n' +
+      'Requirements:\n' +
+      '- Start with HOW or WHY (not yes/no questions)\n' +
+      '- Include specific variables that could be tested'
+    )
+    .setHelpText(
+      'EXAMPLES of good scientific questions:\n' +
+      '- "How would the survival rate change if prey animals had twice the muscle mass?"\n' +
+      '- "Why do some predators hunt in packs while others hunt alone?"'
+    )
+    .setRequired(true);
+
+  logFormInfo_(form, 'G8 Exit Ticket', 22);
   return form;
 }
 
