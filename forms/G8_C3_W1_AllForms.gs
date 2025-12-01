@@ -688,7 +688,7 @@ function createG8Station3_() {
     )
     .setRequired(true)
     .setValidation(FormApp.createParagraphTextValidation()
-      .requireTextLengthGreaterThan(100)
+      .requireTextLengthGreaterThanOrEqualTo(100)
       .build());
 
   logFormInfo_(form, 'G8 Station 3', 25);
@@ -880,7 +880,7 @@ function createG8ExitTicket_() {
     )
     .setRequired(true)
     .setValidation(FormApp.createParagraphTextValidation()
-      .requireTextLengthGreaterThan(80)
+      .requireTextLengthGreaterThanOrEqualTo(80)
       .build());
 
   logFormInfo_(form, 'G8 Exit Ticket', 20);

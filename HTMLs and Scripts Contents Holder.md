@@ -139,6 +139,24 @@ item.setRandomize(true);  // TypeError: item.setRandomize is not a function
 
 // ILLEGAL: shuffleChoices() does NOT exist
 item.shuffleChoices();  // TypeError: item.shuffleChoices is not a function
+
+// ILLEGAL: requireTextLengthGreaterThan() does NOT exist
+FormApp.createParagraphTextValidation()
+    .requireTextLengthGreaterThan(100);  // TypeError: not a function
+\`\`\`
+
+\#\#\# ✅ TEXT VALIDATION - CORRECT METHODS:
+
+\`\`\`javascript
+// CORRECT: Use requireTextLengthGreaterThanOrEqualTo (note: "OrEqualTo")
+.setValidation(FormApp.createParagraphTextValidation()
+    .requireTextLengthGreaterThanOrEqualTo(100)
+    .build());
+
+// CORRECT: Use requireTextLengthLessThanOrEqualTo
+.setValidation(FormApp.createParagraphTextValidation()
+    .requireTextLengthLessThanOrEqualTo(500)
+    .build());
 \`\`\`
 
 \#\#\# ✅ SHUFFLE CHOICES WORKAROUND:
@@ -467,7 +485,7 @@ function testAllPatterns() {
 
 \---
 
-\#\# Summary: The 8 Non-Negotiable Rules
+\#\# Summary: The 9 Non-Negotiable Rules
 
 \`\`\`
 1\. NEVER call setPoints(0) \- omit setPoints() instead
@@ -478,6 +496,7 @@ function testAllPatterns() {
 6\. NEVER use setShuffleOrder() \- it does NOT exist in the API (use Forms UI instead)
 7\. ALWAYS use setRequireLogin(true) for verified email without manual entry
 8\. ALWAYS document manual UI config required (grade release, feedback visibility)
+9\. NEVER use requireTextLengthGreaterThan() \- use requireTextLengthGreaterThanOrEqualTo() instead
 \`\`\`
 
 \---
@@ -518,6 +537,7 @@ Test pattern before deployment:
 | 1.0 | 2025-11-04 | Initial documentation from systematic debugging |
 | 1.1 | 2025-12-01 | Added CRITICAL section: Methods that DO NOT EXIST (setShuffleOrder, setRandomize, shuffleChoices). Added Rules 5a-5c, 11-12. Updated summary to 6 rules. |
 | 1.2 | 2025-12-01 | Added CRITICAL section: Form Settings API vs Manual UI. Documented setRequireLogin(true) for verified email. Added Rules 5d-5f, 7-8. Updated summary to 8 rules. |
+| 1.3 | 2025-12-01 | Added requireTextLengthGreaterThan() to non-existent methods. Correct method is requireTextLengthGreaterThanOrEqualTo(). Added Rule 9. Updated summary to 9 rules. |
 
 \---
 
