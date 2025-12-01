@@ -81,6 +81,51 @@ form.addSectionHeaderItem()
 
 \---
 
+\#\# CRITICAL: Form Settings - API vs Manual UI
+
+\#\#\# ✅ AVAILABLE VIA API:
+
+\`\`\`javascript
+// Quiz mode
+form.setIsQuiz(true);
+
+// Authentication - forces Google sign-in for verified email (no manual input)
+form.setRequireLogin(true);
+
+// Email collection
+form.setCollectEmail(true);
+
+// Response limits
+form.setLimitOneResponsePerUser(true);
+form.setAllowResponseEdits(true);
+
+// UI enhancements
+form.setProgressBar(true);
+form.setConfirmationMessage('Your message here');
+\`\`\`
+
+\#\#\# ❌ NOT AVAILABLE VIA API (Must configure in Forms UI):
+
+The following settings CANNOT be set programmatically and MUST be configured manually after form creation:
+
+\`\`\`
+Settings > Quizzes:
+- "Release grade": Choose "Immediately after each submission" vs "Later, after manual review"
+- "Respondent can see":
+  - [ ] Missed questions
+  - [ ] Correct answers
+  - [ ] Point values
+
+Settings > Responses:
+- Shuffle question order (per-form level)
+\`\`\`
+
+\*\*RULE 5d:\*\* Always use \`setRequireLogin(true)\` for verified email collection without manual entry
+\*\*RULE 5e:\*\* After form creation, manually configure quiz feedback settings in Forms UI
+\*\*RULE 5f:\*\* Add code comments noting required manual UI configuration
+
+\---
+
 \#\# CRITICAL: Methods That DO NOT EXIST in FormApp API
 
 \#\#\# ❌ THESE METHODS DO NOT EXIST:
@@ -94,6 +139,24 @@ item.setRandomize(true);  // TypeError: item.setRandomize is not a function
 
 // ILLEGAL: shuffleChoices() does NOT exist
 item.shuffleChoices();  // TypeError: item.shuffleChoices is not a function
+
+// ILLEGAL: requireTextLengthGreaterThan() does NOT exist
+FormApp.createParagraphTextValidation()
+    .requireTextLengthGreaterThan(100);  // TypeError: not a function
+\`\`\`
+
+\#\#\# ✅ TEXT VALIDATION - CORRECT METHODS:
+
+\`\`\`javascript
+// CORRECT: Use requireTextLengthGreaterThanOrEqualTo (note: "OrEqualTo")
+.setValidation(FormApp.createParagraphTextValidation()
+    .requireTextLengthGreaterThanOrEqualTo(100)
+    .build());
+
+// CORRECT: Use requireTextLengthLessThanOrEqualTo
+.setValidation(FormApp.createParagraphTextValidation()
+    .requireTextLengthLessThanOrEqualTo(500)
+    .build());
 \`\`\`
 
 \#\#\# ✅ SHUFFLE CHOICES WORKAROUND:
@@ -422,7 +485,7 @@ function testAllPatterns() {
 
 \---
 
-\#\# Summary: The 6 Non-Negotiable Rules
+\#\# Summary: The 9 Non-Negotiable Rules
 
 \`\`\`
 1\. NEVER call setPoints(0) \- omit setPoints() instead
@@ -431,6 +494,9 @@ function testAllPatterns() {
 4\. ALWAYS validate points \> 0 before calling setPoints()
 5\. ALWAYS use FormApp.createFeedback().build() pattern for feedback
 6\. NEVER use setShuffleOrder() \- it does NOT exist in the API (use Forms UI instead)
+7\. ALWAYS use setRequireLogin(true) for verified email without manual entry
+8\. ALWAYS document manual UI config required (grade release, feedback visibility)
+9\. NEVER use requireTextLengthGreaterThan() \- use requireTextLengthGreaterThanOrEqualTo() instead
 \`\`\`
 
 \---
@@ -458,6 +524,8 @@ Test pattern before deployment:
 \- Verify text items work WITHOUT setPoints()
 \- Verify validation catches setPoints(0) before runtime
 \- Verify NO calls to setShuffleOrder(), setRandomize(), or shuffleChoices()
+\- Verify setRequireLogin(true) is present for verified email collection
+\- After deployment: manually configure quiz feedback in Forms UI
 \`\`\`
 
 \---
@@ -468,6 +536,8 @@ Test pattern before deployment:
 |---------|------|--------|
 | 1.0 | 2025-11-04 | Initial documentation from systematic debugging |
 | 1.1 | 2025-12-01 | Added CRITICAL section: Methods that DO NOT EXIST (setShuffleOrder, setRandomize, shuffleChoices). Added Rules 5a-5c, 11-12. Updated summary to 6 rules. |
+| 1.2 | 2025-12-01 | Added CRITICAL section: Form Settings API vs Manual UI. Documented setRequireLogin(true) for verified email. Added Rules 5d-5f, 7-8. Updated summary to 8 rules. |
+| 1.3 | 2025-12-01 | Added requireTextLengthGreaterThan() to non-existent methods. Correct method is requireTextLengthGreaterThanOrEqualTo(). Added Rule 9. Updated summary to 9 rules. |
 
 \---
 

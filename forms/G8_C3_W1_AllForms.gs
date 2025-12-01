@@ -17,14 +17,17 @@
  *   3. Run: createAllG8C3W1Forms()
  *   4. Authorize when prompted
  *   5. Check Logger for form URLs (View > Logs)
+ *   6. MANUAL CONFIG REQUIRED (Settings > Quizzes in each form):
+ *      - Release grade: "Immediately after each submission"
+ *      - Respondent can see: Check ALL boxes (Missed questions, Correct answers, Point values)
+ *      - Enable "Shuffle option order" for anti-cheating
  *
- * FEATURES UTILIZED:
- *   - Quiz mode with auto-grading
- *   - Progress bar for student pacing
- *   - NOTE: Enable "Shuffle option order" manually in Forms UI for anti-cheating
- *   - Response validation on calculations
- *   - Page breaks for clear sections
- *   - Help text scaffolding
+ * FORM SETTINGS (set via API):
+ *   - Quiz mode enabled
+ *   - Requires Google sign-in (verified email, no manual entry)
+ *   - Limit 1 response per user
+ *   - Allow response editing after submit
+ *   - Progress bar enabled
  */
 
 // ============================================================================
@@ -70,11 +73,16 @@ function createG8Hook_() {
     'Tip: Use what you learned about forces in Cycle 2!'
   );
 
+  // Quiz and response settings
   form.setIsQuiz(true);
+  form.setRequireLogin(true);  // Forces Google sign-in for verified email
   form.setCollectEmail(true);
   form.setLimitOneResponsePerUser(true);
   form.setAllowResponseEdits(true);
   form.setProgressBar(true);
+  // NOTE: After creation, manually set in Forms UI (Settings > Quizzes):
+  // - Release grade: "Immediately after each submission"
+  // - Respondent can see: Missed questions, Correct answers, Point values
   form.setConfirmationMessage(
     'Hook submitted! You are ready for Station 1.\n\n' +
     'Next step: Analyze the forces between predator and prey using Newton\'s Laws.'
@@ -205,11 +213,16 @@ function createG8Station1_() {
     'You will need a calculator!'
   );
 
+  // Quiz and response settings
   form.setIsQuiz(true);
+  form.setRequireLogin(true);  // Forces Google sign-in for verified email
   form.setCollectEmail(true);
   form.setLimitOneResponsePerUser(true);
   form.setAllowResponseEdits(true);
   form.setProgressBar(true);
+  // NOTE: After creation, manually set in Forms UI (Settings > Quizzes):
+  // - Release grade: "Immediately after each submission"
+  // - Respondent can see: Missed questions, Correct answers, Point values
   form.setConfirmationMessage(
     'Station 1 complete!\n\n' +
     'KEY INSIGHT: Newton\'s Third Law means forces are equal.\n' +
@@ -385,11 +398,16 @@ function createG8Station2_() {
     '- Repeat for 3+ generations'
   );
 
+  // Quiz and response settings
   form.setIsQuiz(true);
+  form.setRequireLogin(true);  // Forces Google sign-in for verified email
   form.setCollectEmail(true);
   form.setLimitOneResponsePerUser(true);
   form.setAllowResponseEdits(true);
   form.setProgressBar(true);
+  // NOTE: After creation, manually set in Forms UI (Settings > Quizzes):
+  // - Release grade: "Immediately after each submission"
+  // - Respondent can see: Missed questions, Correct answers, Point values
   form.setConfirmationMessage(
     'Station 2 complete!\n\n' +
     'KEY INSIGHT: Selection pressure changes trait frequency over time.\n' +
@@ -520,11 +538,16 @@ function createG8Station3_() {
     '- You must calculate the force needed to escape'
   );
 
+  // Quiz and response settings
   form.setIsQuiz(true);
+  form.setRequireLogin(true);  // Forces Google sign-in for verified email
   form.setCollectEmail(true);
   form.setLimitOneResponsePerUser(true);
   form.setAllowResponseEdits(true);
   form.setProgressBar(true);
+  // NOTE: After creation, manually set in Forms UI (Settings > Quizzes):
+  // - Release grade: "Immediately after each submission"
+  // - Respondent can see: Missed questions, Correct answers, Point values
   form.setConfirmationMessage(
     'Station 3 complete!\n\n' +
     'Excellent work! You used physics to explain biological adaptations.\n' +
@@ -665,7 +688,7 @@ function createG8Station3_() {
     )
     .setRequired(true)
     .setValidation(FormApp.createParagraphTextValidation()
-      .requireTextLengthGreaterThan(100)
+      .requireTextLengthGreaterThanOrEqualTo(100)
       .build());
 
   logFormInfo_(form, 'G8 Station 3', 25);
@@ -686,16 +709,21 @@ function createG8ExitTicket_() {
     'Time: About 15 minutes\n' +
     'Points: 20 total\n\n' +
     'QUESTION TYPES:\n' +
-    '- 2 questions on NEW content (natural selection)\n' +
-    '- 2 questions SPIRALING back (forces)\n' +
-    '- 1 INTEGRATION question (connects both)'
+    '- 2 NEW questions (Cycle 3 natural selection)\n' +
+    '- 2 SPIRAL questions (Cycle 2 forces)\n' +
+    '- 1 INTEGRATION question (connects both cycles)'
   );
 
+  // Quiz and response settings
   form.setIsQuiz(true);
+  form.setRequireLogin(true);  // Forces Google sign-in for verified email
   form.setCollectEmail(true);
   form.setLimitOneResponsePerUser(true);
   form.setAllowResponseEdits(true);
   form.setProgressBar(true);
+  // NOTE: After creation, manually set in Forms UI (Settings > Quizzes):
+  // - Release grade: "Immediately after each submission"
+  // - Respondent can see: Missed questions, Correct answers, Point values
   form.setConfirmationMessage(
     'WEEK 1 COMPLETE! Congratulations!\n\n' +
     'You connected physics to evolutionary biology.\n\n' +
@@ -706,14 +734,14 @@ function createG8ExitTicket_() {
     'NEXT WEEK: Why do whales have finger bones? Evidence of evolution!'
   );
 
-  // === PAGE 1: New Content ===
+  // === PAGE 1: NEW & SPIRAL Questions ===
   form.addPageBreakItem()
-    .setTitle('NEW CONTENT: Natural Selection')
-    .setHelpText('These questions test what you learned today about variation and selection.');
+    .setTitle('Questions 1-4: NEW & SPIRAL')
+    .setHelpText('2 NEW questions (natural selection) + 2 SPIRAL questions (Cycle 2 forces)');
 
-  // Q1: Natural selection explanation (4 pts - manual)
+  // Q1: Natural selection explanation (4 pts - manual) - NEW
   form.addSectionHeaderItem()
-    .setTitle('Question 1: Explain Natural Selection (4 points)')
+    .setTitle('Question 1: NEW - Explain Natural Selection (4 points)')
     .setHelpText(
       'MANUAL GRADING - 4 points\n' +
       '4 pts: Variation + differential survival + frequency change over time\n' +
@@ -734,12 +762,8 @@ function createG8ExitTicket_() {
     )
     .setRequired(true);
 
-  // === PAGE 2: Spiral ===
-  form.addPageBreakItem()
-    .setTitle('SPIRAL: Cycle 2 Forces Review')
-    .setHelpText('These questions check that you still remember Newton\'s Laws.');
-
-  // Q2: N3L MCQ (4 pts)
+  // Q2: N3L MCQ (4 pts) - SPIRAL
+  form.addSectionHeaderItem().setTitle('Question 2: SPIRAL - Newton\'s Third Law');
   const q2 = form.addMultipleChoiceItem()
     .setTitle('A 100 kg predator tackles a 50 kg prey. Compare the forces:')
     .setHelpText('Apply Newton\'s Third Law.')
@@ -764,9 +788,9 @@ function createG8ExitTicket_() {
       .build()
   );
 
-  // Q3: Population math (4 pts - manual)
+  // Q3: Population math (4 pts - manual) - NEW (natural selection math)
   form.addSectionHeaderItem()
-    .setTitle('Question 3: Population Calculation (4 points)')
+    .setTitle('Question 3: NEW - Selection Math (4 points)')
     .setHelpText(
       'MANUAL GRADING - 4 points\n' +
       '4 pts: Correct answer (about 88%) with clear work shown\n' +
@@ -799,9 +823,9 @@ function createG8ExitTicket_() {
     )
     .setRequired(true);
 
-  // Q4: F=ma calculation (4 pts - manual)
+  // Q4: F=ma calculation (4 pts - manual) - SPIRAL
   form.addSectionHeaderItem()
-    .setTitle('Question 4: Force Calculation (4 points)')
+    .setTitle('Question 4: SPIRAL - Force Calculation (4 points)')
     .setHelpText(
       'MANUAL GRADING - 4 points\n' +
       '4 pts: Correct answer (5 m/s^2) with work and units\n' +
@@ -817,14 +841,14 @@ function createG8ExitTicket_() {
     .setHelpText('Use a = F / m')
     .setRequired(true);
 
-  // === PAGE 3: Integration ===
+  // === PAGE 2: Integration ===
   form.addPageBreakItem()
-    .setTitle('INTEGRATION: Connect Physics and Evolution')
+    .setTitle('INTEGRATION (Question 5)')
     .setHelpText('This question requires knowledge from BOTH Cycle 2 AND Cycle 3.');
 
   // Q5: Integration (4 pts - manual)
   form.addSectionHeaderItem()
-    .setTitle('Question 5: Predict Population Change (4 points)')
+    .setTitle('Question 5: INTEGRATION (4 points)')
     .setHelpText(
       'MANUAL GRADING - 4 points (3D Assessment)\n' +
       '4 pts: Natural selection mechanism + physics concepts + prediction over time\n' +
@@ -856,7 +880,7 @@ function createG8ExitTicket_() {
     )
     .setRequired(true)
     .setValidation(FormApp.createParagraphTextValidation()
-      .requireTextLengthGreaterThan(80)
+      .requireTextLengthGreaterThanOrEqualTo(80)
       .build());
 
   logFormInfo_(form, 'G8 Exit Ticket', 20);
