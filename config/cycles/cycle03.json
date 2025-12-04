@@ -209,7 +209,7 @@
             },
             "station2": {
               "title": "Trait Variation Simulation",
-              "points": 21,
+              "points": 20,
               "resource": "Bean simulation",
               "questions": 5,
               "focus": "Natural selection mechanism, Lamarckian check"
@@ -223,7 +223,7 @@
             },
             "exitTicket": {
               "title": "Force-Selection Connection",
-              "points": 22,
+              "points": 23,
               "questions": 6,
               "structure": {
                 "new": 2,
@@ -238,7 +238,56 @@
         },
         "2": {
           "title": "Evidence of Evolution",
-          "status": "planned"
+          "status": "planned",
+          "files": {
+            "forms": "content/grade8/cycle03/week2/forms.gs",
+            "studentPage": "content/grade8/cycle03/week2/student-page.html",
+            "lessonPlan": "content/grade8/cycle03/week2/lesson-plan.md"
+          },
+          "stations": {
+            "hook": {
+              "title": "The Whale Finger Mystery",
+              "points": 12,
+              "resource": "Whale flipper X-ray + human hand comparison",
+              "questions": 5,
+              "focus": "Homologous structures, common ancestry"
+            },
+            "station1": {
+              "title": "Comparative Anatomy Analysis",
+              "points": 20,
+              "resource": "Bone comparison diagrams",
+              "questions": 6,
+              "focus": "Homologous vs analogous structures",
+              "spiralTarget": "Natural selection from Week 1"
+            },
+            "station2": {
+              "title": "Fossil Record Investigation",
+              "points": 20,
+              "resource": "Fossil timeline + transition fossils",
+              "questions": 5,
+              "focus": "Evidence patterns, transitional forms"
+            },
+            "station3": {
+              "title": "Design a Transitional Form",
+              "points": 25,
+              "resource": "Ancestor/descendant cards + constraints",
+              "questions": 5,
+              "focus": "Apply evolutionary principles to prediction"
+            },
+            "exitTicket": {
+              "title": "Evidence Integration",
+              "points": 23,
+              "questions": 6,
+              "structure": {
+                "new": 2,
+                "spiral": 2,
+                "integration": 1,
+                "sep1": 1
+              }
+            }
+          },
+          "formIds": {},
+          "responseSheetIds": {}
         },
         "3": {
           "title": "Synthesis & Assessment",
