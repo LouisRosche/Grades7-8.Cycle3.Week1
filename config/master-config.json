@@ -1,0 +1,187 @@
+{
+  "$schema": "./schema/master-schema.json",
+  "version": "2.0.0",
+  "lastUpdated": "2025-12-04",
+
+  "school": {
+    "name": "KAMS",
+    "fullName": "Knowledge Academy Middle School",
+    "academicYear": "2025-2026"
+  },
+
+  "grades": {
+    "7": {
+      "name": "Grade 7",
+      "subject": "Life & Earth Science",
+      "periods": ["Period 2", "Period 7"],
+      "studentCount": 60
+    },
+    "8": {
+      "name": "Grade 8",
+      "subject": "Physical Science",
+      "periods": ["Period 3", "Period 5"],
+      "studentCount": 55
+    }
+  },
+
+  "cycles": {
+    "range": {
+      "start": 3,
+      "end": 10
+    },
+    "totalCycles": 8,
+    "weeksPerCycle": 3,
+    "pointsPerWeek": 100,
+    "formsPerWeek": 5
+  },
+
+  "assessment": {
+    "formStructure": {
+      "hook": {
+        "points": 12,
+        "duration": 10,
+        "autoGradedPercent": 25,
+        "questionCount": 5
+      },
+      "station1": {
+        "points": 20,
+        "duration": 18,
+        "autoGradedPercent": 50,
+        "questionCount": 6
+      },
+      "station2": {
+        "points": 20,
+        "duration": 15,
+        "autoGradedPercent": 40,
+        "questionCount": 5
+      },
+      "station3": {
+        "points": 25,
+        "duration": 20,
+        "autoGradedPercent": 0,
+        "questionCount": 5
+      },
+      "exitTicket": {
+        "points": 23,
+        "duration": 15,
+        "autoGradedPercent": 35,
+        "questionCount": 6
+      }
+    },
+    "questionTypes": {
+      "autoGradable": ["multipleChoice", "checkbox", "dropdown", "scale", "grid"],
+      "manualGrading": ["paragraph", "shortAnswer", "fileUpload"],
+      "diagnostic": ["confidence", "selfAssessment"]
+    },
+    "spiralStructure": {
+      "questionsPerExit": 2,
+      "integrationQuestions": 1,
+      "sep1Questions": 1
+    },
+    "targetAutoGradedPercent": {
+      "min": 30,
+      "max": 40
+    }
+  },
+
+  "rubrics": {
+    "scales": {
+      "standard": [5, 4, 3, 2, 1, 0],
+      "simplified": [4, 3, 2, 1, 0],
+      "binary": [1, 0]
+    },
+    "requirements": [
+      "Observable behaviors only",
+      "No subjective language",
+      "Example responses for each level",
+      "Distractor analysis for common errors"
+    ]
+  },
+
+  "mtss": {
+    "tiers": {
+      "1": {
+        "name": "Universal",
+        "scoreRange": { "min": 70, "max": 100 },
+        "intervention": "Core instruction with standard differentiation"
+      },
+      "2": {
+        "name": "Targeted",
+        "scoreRange": { "min": 50, "max": 69 },
+        "intervention": "Small group reteach, peer tutoring, modified assignments"
+      },
+      "3": {
+        "name": "Intensive",
+        "scoreRange": { "min": 0, "max": 49 },
+        "intervention": "1:1 intervention, alternative assessment, extended time"
+      }
+    },
+    "alerts": {
+      "misconceptionThreshold": 30,
+      "wholeClassReteachThreshold": 40,
+      "spiralEffectivenessMin": 60
+    },
+    "dataRefreshInterval": "daily",
+    "reportFormats": ["json", "csv", "xlsx"]
+  },
+
+  "platforms": {
+    "lms": {
+      "name": "Canvas",
+      "integration": "LTI",
+      "gradebookSync": "manual"
+    },
+    "forms": {
+      "name": "Google Forms",
+      "apiVersion": "FormApp",
+      "responseStorage": "Google Sheets"
+    },
+    "data": {
+      "aggregation": "Google Sheets + Apps Script",
+      "analysis": "JSON export",
+      "visualization": "Google Sheets charts"
+    }
+  },
+
+  "formSettings": {
+    "security": {
+      "requireLogin": true,
+      "collectEmail": true,
+      "limitOneResponse": true,
+      "allowEdits": true
+    },
+    "display": {
+      "progressBar": true,
+      "shuffleQuestions": false,
+      "confirmationMessage": "Your response has been recorded. You may edit until the due date."
+    },
+    "manualConfig": [
+      "Release grade timing",
+      "Feedback visibility options",
+      "Shuffle question order (if needed)"
+    ]
+  },
+
+  "fileNaming": {
+    "directories": "lowercase with leading zeros (cycle03, week1)",
+    "configFiles": "lowercase-hyphenated.json",
+    "scripts": "PascalCase.gs",
+    "templates": "PascalCase-template.ext",
+    "contentDocs": "lowercase-hyphenated.md",
+    "htmlPages": "lowercase-hyphenated.html",
+    "outputJson": "descriptive-lowercase.json"
+  },
+
+  "formNaming": {
+    "pattern": "G{grade}.C{cycle}.W{week}: {station} - {title} [{points} pts]",
+    "example": "G7.C3.W1: Hook - The Hot Car Mystery [12 pts]"
+  },
+
+  "questionIds": {
+    "pattern": "g{grade}_c{cycle}_w{week}_{station}_q{number}",
+    "example": "g7_c3_w1_hook_q1"
+  },
+
+  "activeCycles": ["cycle03"],
+  "plannedCycles": ["cycle04", "cycle05", "cycle06", "cycle07", "cycle08", "cycle09", "cycle10"]
+}

@@ -1,0 +1,263 @@
+{
+  "$schema": "../schema/cycle-schema.json",
+  "cycle": 3,
+  "name": "Cycle 3: Weaponizing the Gaps",
+  "status": "active",
+  "dates": {
+    "start": "2025-12-01",
+    "end": "2025-12-19",
+    "week1": { "start": "2025-12-01", "end": "2025-12-05" },
+    "week2": { "start": "2025-12-08", "end": "2025-12-12" },
+    "week3": { "start": "2025-12-15", "end": "2025-12-19" }
+  },
+
+  "grades": {
+    "7": {
+      "topic": "Climate Change & Energy Flow",
+      "phenomenon": {
+        "week1": "Why does a car get hot inside but not outside?",
+        "week2": "Why might melting ice cause MORE melting?",
+        "week3": "Synthesis & Assessment"
+      },
+      "ngss": {
+        "primary": {
+          "code": "MS-ESS3-5",
+          "description": "Ask questions to clarify evidence of the factors that have caused the rise in global temperatures over the past century."
+        },
+        "spiral": [
+          { "code": "MS-PS1-5", "description": "Energy changes in chemical reactions", "fromCycle": 2 },
+          { "code": "MS-PS1-6", "description": "Design solutions for exo/endothermic reactions", "fromCycle": 2 }
+        ]
+      },
+      "threeDimensional": {
+        "sep": ["Asking Questions", "Constructing Explanations", "Engaging in Argument"],
+        "dci": ["ESS3.D", "PS1.B", "PS3.A"],
+        "ccc": ["Cause and Effect", "Energy and Matter", "Stability and Change"]
+      },
+      "misconceptions": [
+        {
+          "id": "bond-break-release",
+          "description": "Breaking bonds RELEASES energy",
+          "correctUnderstanding": "Breaking bonds REQUIRES energy; forming bonds releases energy",
+          "frequency": 60,
+          "targetedIn": ["w1_s1_q3", "w1_s1_q4", "w1_exit_q2"]
+        },
+        {
+          "id": "mass-disappear",
+          "description": "Mass 'disappears' in chemical reactions",
+          "correctUnderstanding": "Mass is conserved; atoms rearrange but aren't destroyed",
+          "frequency": 40,
+          "targetedIn": ["w1_s2_q2", "w1_s2_q4", "w1_exit_q4"]
+        },
+        {
+          "id": "energy-not-measurable",
+          "description": "Energy is not a measurable quantity",
+          "correctUnderstanding": "Energy can be quantified in joules, calories, etc.",
+          "frequency": 35,
+          "targetedIn": ["w1_s3_q3", "w2_s1_q5"]
+        }
+      ],
+      "weeks": {
+        "1": {
+          "title": "The Greenhouse Effect Mystery",
+          "status": "complete",
+          "files": {
+            "forms": "content/grade7/cycle03/week1/forms.gs",
+            "studentPage": "content/grade7/cycle03/week1/student-page.html",
+            "lessonPlan": "content/grade7/cycle03/week1/lesson-plan.md"
+          },
+          "stations": {
+            "hook": {
+              "title": "The Hot Car Mystery",
+              "points": 12,
+              "resource": "phenomenon image + video",
+              "questions": 5,
+              "focus": "Prior knowledge activation, initial predictions"
+            },
+            "station1": {
+              "title": "Molecular Vibration & IR",
+              "points": 20,
+              "resource": "PhET Molecules and Light",
+              "resourceUrl": "https://phet.colorado.edu/en/simulations/molecules-and-light",
+              "questions": 6,
+              "focus": "Bond energy misconception targeting",
+              "spiralTarget": "Bond energy from Cycle 2"
+            },
+            "station2": {
+              "title": "Carbon Cycle Conservation",
+              "points": 20,
+              "resource": "Carbon atom manipulatives",
+              "questions": 5,
+              "focus": "Mass conservation in Earth systems",
+              "spiralTarget": "Conservation of mass from Cycle 2"
+            },
+            "station3": {
+              "title": "Engineering Thermal Trap",
+              "points": 25,
+              "resource": "Material samples, thermometers",
+              "questions": 5,
+              "focus": "Apply thermal concepts to design challenge"
+            },
+            "exitTicket": {
+              "title": "Chemistry & Climate Integration",
+              "points": 23,
+              "questions": 6,
+              "structure": {
+                "new": 2,
+                "spiral": 2,
+                "integration": 1,
+                "sep1": 1
+              }
+            }
+          },
+          "formIds": {},
+          "responseSheetIds": {}
+        },
+        "2": {
+          "title": "Feedback Loops & Tipping Points",
+          "status": "planned",
+          "stations": {
+            "hook": { "title": "The Melting Ice Mystery", "points": 12 },
+            "station1": { "title": "Albedo Effect Investigation", "points": 20 },
+            "station2": { "title": "Carbon Sink Analysis", "points": 20 },
+            "station3": { "title": "Engineering Carbon Capture", "points": 25 },
+            "exitTicket": { "title": "Feedback Loop Integration", "points": 23 }
+          }
+        },
+        "3": {
+          "title": "Synthesis & Assessment",
+          "status": "planned",
+          "isAssessmentWeek": true
+        }
+      },
+      "materials": {
+        "station1": ["Chromebooks", "PhET access", "Molecular model printouts"],
+        "station2": ["Carbon atom manipulatives", "Carbon cycle poster", "Calculators"],
+        "station3": ["Material samples set", "Building containers", "Heat lamp", "Thermometers"]
+      }
+    },
+
+    "8": {
+      "topic": "Natural Selection & Forces",
+      "phenomenon": {
+        "week1": "If cheetahs are the fastest land animal, why haven't gazelles gone extinct?",
+        "week2": "Why do whale flippers have finger bones?",
+        "week3": "Synthesis & Assessment"
+      },
+      "ngss": {
+        "primary": {
+          "code": "MS-LS4-4",
+          "description": "Construct an explanation based on evidence that describes how genetic variations of traits in a population increase some individuals' probability of surviving."
+        },
+        "spiral": [
+          { "code": "MS-PS2-1", "description": "Newton's Third Law", "fromCycle": 2 },
+          { "code": "MS-PS2-2", "description": "Force and acceleration relationship", "fromCycle": 2 }
+        ]
+      },
+      "threeDimensional": {
+        "sep": ["Constructing Explanations", "Analyzing Data", "Engaging in Argument"],
+        "dci": ["LS4.B", "PS2.A"],
+        "ccc": ["Cause and Effect", "Stability and Change", "Scale and Proportion"]
+      },
+      "misconceptions": [
+        {
+          "id": "bigger-more-force",
+          "description": "Larger objects exert more force",
+          "correctUnderstanding": "Newton's 3rd Law: forces are always equal and opposite",
+          "frequency": 55,
+          "targetedIn": ["w1_s1_q2", "w1_s1_q3", "w1_exit_q2"]
+        },
+        {
+          "id": "lamarckian",
+          "description": "Individual organisms change/evolve",
+          "correctUnderstanding": "Populations evolve; individuals don't change their traits",
+          "frequency": 45,
+          "targetedIn": ["w1_s2_q5", "w1_exit_q5"]
+        },
+        {
+          "id": "fma-weak",
+          "description": "F=ma works but conceptual understanding is weak",
+          "correctUnderstanding": "Can apply F=ma to novel biological scenarios",
+          "frequency": 45,
+          "targetedIn": ["w1_s1_q4", "w1_s3_q3", "w1_exit_q4"]
+        }
+      ],
+      "weeks": {
+        "1": {
+          "title": "The Cheetah-Gazelle Arms Race",
+          "status": "complete",
+          "files": {
+            "forms": "content/grade8/cycle03/week1/forms.gs",
+            "studentPage": "content/grade8/cycle03/week1/student-page.html",
+            "lessonPlan": "content/grade8/cycle03/week1/lesson-plan.md"
+          },
+          "stations": {
+            "hook": {
+              "title": "The Cheetah-Gazelle Mystery",
+              "points": 12,
+              "resource": "Slow-mo chase video",
+              "questions": 5,
+              "focus": "N3L activation, initial predictions"
+            },
+            "station1": {
+              "title": "Predator-Prey Force Analysis",
+              "points": 20,
+              "resource": "Video analysis + calculators",
+              "questions": 6,
+              "focus": "N3L misconception targeting, F=ma calculations",
+              "spiralTarget": "Newton's Third Law from Cycle 2"
+            },
+            "station2": {
+              "title": "Trait Variation Simulation",
+              "points": 21,
+              "resource": "Bean simulation",
+              "questions": 5,
+              "focus": "Natural selection mechanism, Lamarckian check"
+            },
+            "station3": {
+              "title": "Design a Survivor",
+              "points": 25,
+              "resource": "Design constraints + graph paper",
+              "questions": 5,
+              "focus": "Apply physics to biological design"
+            },
+            "exitTicket": {
+              "title": "Force-Selection Connection",
+              "points": 22,
+              "questions": 6,
+              "structure": {
+                "new": 2,
+                "spiral": 2,
+                "integration": 1,
+                "sep1": 1
+              }
+            }
+          },
+          "formIds": {},
+          "responseSheetIds": {}
+        },
+        "2": {
+          "title": "Evidence of Evolution",
+          "status": "planned"
+        },
+        "3": {
+          "title": "Synthesis & Assessment",
+          "status": "planned",
+          "isAssessmentWeek": true
+        }
+      },
+      "materials": {
+        "station1": ["Chromebooks", "Slow-mo video queued", "Calculators", "F=ma cards"],
+        "station2": ["Dried beans (3 colors)", "Large trays", "Timers", "Data tables"],
+        "station3": ["Constraint cards", "Graph paper", "Colored pencils"]
+      }
+    }
+  },
+
+  "analytics": {
+    "lastDataPull": null,
+    "completionRates": {},
+    "averageScores": {},
+    "misconceptionFlags": []
+  }
+}
