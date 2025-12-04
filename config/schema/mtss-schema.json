@@ -1,0 +1,208 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "mtss-schema.json",
+  "title": "MTSS Data Schema",
+  "description": "Schema for Multi-Tiered System of Supports intervention data",
+
+  "definitions": {
+    "studentIntervention": {
+      "type": "object",
+      "required": ["email", "tier", "overallScore", "struggles"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Student email (primary identifier)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Student display name"
+        },
+        "tier": {
+          "type": "integer",
+          "enum": [1, 2, 3],
+          "description": "Current MTSS tier"
+        },
+        "overallScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Overall percentage score for the period"
+        },
+        "formScores": {
+          "type": "object",
+          "properties": {
+            "hook": { "type": "number" },
+            "station1": { "type": "number" },
+            "station2": { "type": "number" },
+            "station3": { "type": "number" },
+            "exitTicket": { "type": "number" }
+          },
+          "description": "Scores by form"
+        },
+        "struggles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "questionId": { "type": "string" },
+              "questionTitle": { "type": "string" },
+              "pointsEarned": { "type": "number" },
+              "pointsPossible": { "type": "number" },
+              "misconception": { "type": "string" },
+              "suggestedIntervention": { "type": "string" }
+            }
+          },
+          "description": "Questions where student struggled"
+        },
+        "strengths": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Concepts where student performed well"
+        },
+        "spiralPerformance": {
+          "type": "object",
+          "properties": {
+            "spiralQuestionsCorrect": { "type": "integer" },
+            "spiralQuestionsTotal": { "type": "integer" },
+            "spiralPercentage": { "type": "number" }
+          },
+          "description": "Performance on spiral review questions"
+        },
+        "recommendedActions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Specific intervention recommendations"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Teacher notes or observations"
+        }
+      }
+    },
+
+    "classPattern": {
+      "type": "object",
+      "properties": {
+        "questionId": { "type": "string" },
+        "questionTitle": { "type": "string" },
+        "missRate": { "type": "number" },
+        "misconceptionId": { "type": "string" },
+        "misconceptionDescription": { "type": "string" },
+        "wholeClassReteachRecommended": { "type": "boolean" },
+        "suggestedReteachStrategy": { "type": "string" }
+      }
+    }
+  },
+
+  "type": "object",
+  "required": ["generated", "cycle", "week", "grade"],
+  "properties": {
+    "generated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this report was generated"
+    },
+    "cycle": {
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 10
+    },
+    "week": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3
+    },
+    "grade": {
+      "type": "integer",
+      "enum": [7, 8]
+    },
+    "period": {
+      "type": "string",
+      "description": "Class period (e.g., 'Period 2')"
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "totalStudents": { "type": "integer" },
+        "tier1Count": { "type": "integer" },
+        "tier2Count": { "type": "integer" },
+        "tier3Count": { "type": "integer" },
+        "classAverage": { "type": "number" },
+        "completionRate": { "type": "number" },
+        "spiralEffectiveness": { "type": "number" }
+      }
+    },
+    "tier1Students": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/studentIntervention" },
+      "description": "Students performing at Tier 1 (70-100%)"
+    },
+    "tier2Students": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/studentIntervention" },
+      "description": "Students needing Tier 2 support (50-69%)"
+    },
+    "tier3Students": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/studentIntervention" },
+      "description": "Students needing Tier 3 intensive support (0-49%)"
+    },
+    "classPatterns": {
+      "type": "object",
+      "properties": {
+        "highMissQuestions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/classPattern" },
+          "description": "Questions missed by >30% of class"
+        },
+        "wholeClassReteachNeeded": {
+          "type": "boolean"
+        },
+        "reteachTopics": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "spiralGaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "concept": { "type": "string" },
+              "cycleOrigin": { "type": "integer" },
+              "currentMissRate": { "type": "number" }
+            }
+          },
+          "description": "Spiral concepts with poor retention"
+        }
+      }
+    },
+    "trends": {
+      "type": "object",
+      "properties": {
+        "comparedToPreviousWeek": {
+          "type": "object",
+          "properties": {
+            "averageChange": { "type": "number" },
+            "tier2MovedToTier1": { "type": "integer" },
+            "tier1MovedToTier2": { "type": "integer" },
+            "tier3MovedToTier2": { "type": "integer" },
+            "tier2MovedToTier3": { "type": "integer" }
+          }
+        },
+        "misconceptionProgress": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "misconceptionId": { "type": "string" },
+              "previousMissRate": { "type": "number" },
+              "currentMissRate": { "type": "number" },
+              "improving": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

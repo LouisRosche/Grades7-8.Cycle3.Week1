@@ -1,0 +1,173 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "form-schema.json",
+  "title": "KAMS Form Question Schema",
+  "description": "Schema for individual form questions with metadata for analysis and MTSS",
+  "type": "object",
+  "required": ["id", "grade", "cycle", "week", "station", "questionNumber", "type", "points", "title"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^g[78]_c(0[3-9]|10)_w[1-3]_(hook|s[1-3]|exit)_q[1-9][0-9]?$",
+      "description": "Unique question identifier following pattern g{grade}_c{cycle}_w{week}_{station}_q{number}"
+    },
+    "grade": {
+      "type": "integer",
+      "enum": [7, 8],
+      "description": "Grade level"
+    },
+    "cycle": {
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 10,
+      "description": "Cycle number (3-10)"
+    },
+    "week": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3,
+      "description": "Week within cycle"
+    },
+    "station": {
+      "type": "string",
+      "enum": ["hook", "station1", "station2", "station3", "exitTicket"],
+      "description": "Station/form type"
+    },
+    "questionNumber": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "Question number within the form"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "multipleChoice",
+        "checkbox",
+        "dropdown",
+        "scale",
+        "grid",
+        "paragraph",
+        "shortAnswer",
+        "fileUpload",
+        "confidence",
+        "selfAssessment"
+      ],
+      "description": "Question type"
+    },
+    "autoGraded": {
+      "type": "boolean",
+      "description": "Whether this question is auto-graded"
+    },
+    "points": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "Point value (0 for diagnostic items)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Question text/prompt"
+    },
+    "helpText": {
+      "type": "string",
+      "description": "Additional instructions or context"
+    },
+    "required": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether response is required"
+    },
+    "choices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["text"],
+        "properties": {
+          "text": { "type": "string" },
+          "correct": { "type": "boolean" }
+        }
+      },
+      "description": "Answer choices for MC/checkbox/dropdown"
+    },
+    "validation": {
+      "type": "object",
+      "properties": {
+        "minLength": { "type": "integer" },
+        "maxLength": { "type": "integer" },
+        "pattern": { "type": "string" },
+        "requiresNumber": { "type": "boolean" }
+      },
+      "description": "Validation rules for text responses"
+    },
+    "feedback": {
+      "type": "object",
+      "properties": {
+        "correct": { "type": "string" },
+        "incorrect": { "type": "string" }
+      },
+      "description": "Feedback for auto-graded items"
+    },
+    "rubric": {
+      "type": "object",
+      "properties": {
+        "scale": {
+          "type": "array",
+          "items": { "type": "integer" }
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "score": { "type": "integer" },
+              "description": { "type": "string" },
+              "example": { "type": "string" }
+            }
+          }
+        }
+      },
+      "description": "Rubric for manual grading"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "spiral": {
+          "type": "boolean",
+          "description": "Whether this is a spiral review question"
+        },
+        "cycleOrigin": {
+          "type": "integer",
+          "description": "If spiral, which cycle is being reviewed"
+        },
+        "integration": {
+          "type": "boolean",
+          "description": "Whether this integrates multiple cycles/concepts"
+        },
+        "misconceptionTarget": {
+          "type": "string",
+          "description": "ID of misconception this question targets"
+        },
+        "bloomLevel": {
+          "type": "string",
+          "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"],
+          "description": "Bloom's taxonomy level"
+        },
+        "sep": {
+          "type": "string",
+          "description": "Science and Engineering Practice"
+        },
+        "dci": {
+          "type": "string",
+          "description": "Disciplinary Core Idea"
+        },
+        "ccc": {
+          "type": "string",
+          "description": "Crosscutting Concept"
+        }
+      },
+      "description": "Metadata for analysis and reporting"
+    }
+  }
+}
