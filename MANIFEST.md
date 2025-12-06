@@ -30,15 +30,16 @@ C3.Repo/
 │
 ├── content/                     # All instructional content
 │   ├── grade7/                  # Grade 7: Life & Earth Science
+│   │   ├── cycle02/             # ✅ Complete (4 weeks)
 │   │   ├── cycle03/             # ✅ Complete
 │   │   ├── cycle04/             # 🟡 In Progress
 │   │   ├── cycle05-10/          # 📋 Placeholder
 │   ├── grade8/                  # Grade 8: Physical Science
+│   │   ├── cycle02/             # ✅ Complete (4 weeks)
 │   │   ├── cycle03/             # ✅ Complete
 │   │   ├── cycle04/             # 📋 Placeholder
 │   │   ├── cycle05-10/          # 📋 Placeholder
 │   └── resources/               # Cross-grade resources
-│       └── source-content/      # Source HTML/scripts holders
 │
 ├── data/                        # Data aggregation & analysis
 │   ├── FormRegistry.gs
@@ -61,6 +62,7 @@ C3.Repo/
 
 | Cycle | Grade 7 | Grade 8 | Status |
 |-------|---------|---------|--------|
+| **C2** | 75% ✅ | 75% ✅ | **CONTENT READY** |
 | **C3** | 100% ✅ | 100% ✅ | **DEPLOYED** |
 | **C4** | 45% 🟡 | 10% 📋 | In Progress |
 | **C5** | 0% 📋 | 0% 📋 | Placeholder |
@@ -71,6 +73,28 @@ C3.Repo/
 | **C10** | 0% 📋 | 0% 📋 | Placeholder |
 
 **Legend:** ✅ Complete | 🟡 In Progress | 📋 Placeholder | ❌ Not Started
+
+---
+
+## Cycle 2 - 75% COMPLETE ✅
+
+### Grade 7: Molecular Structure, Bonding & Reactions (4 weeks)
+
+| Week | forms.gs | student-page.html | lesson-plan.md | curriculum-design.md | Status |
+|------|----------|-------------------|----------------|----------------------|--------|
+| W1 | ❌ | ✅ | ❌ | ✅ (shared) | **HTML READY** |
+| W2 | ❌ | ✅ | ❌ | ✅ (shared) | **HTML READY** |
+| W3 | ✅ | ✅ | ❌ | ✅ (shared) | **CONTENT READY** |
+| W4 | ❌ | ✅ | ❌ | ✅ (shared) | **HTML READY** |
+
+### Grade 8: Forces, Energy & Collisions (4 weeks)
+
+| Week | forms.gs | student-page.html | lesson-plan.md | curriculum-design.md | Status |
+|------|----------|-------------------|----------------|----------------------|--------|
+| W1 | ❌ | ✅ | ❌ | ✅ (shared) | **HTML READY** |
+| W2 | ❌ | ✅ | ❌ | ✅ (shared) | **HTML READY** |
+| W3 | ✅ | ✅ | ❌ | ✅ (shared) | **CONTENT READY** |
+| W4 | ❌ | ✅ | ❌ | ✅ (shared) | **HTML READY** |
 
 ---
 
@@ -159,7 +183,6 @@ Each placeholder cycle includes:
 |------|---------|--------|
 | `audit-w2-content.md` | Accessibility/MTSS audit report | ✅ Complete |
 | `exemplars-cycle03-week2.md` | Model student responses | ✅ Complete |
-| `source-content/htmls-and-scripts-contents-holder.docx` | Source HTML content & scripts for C2-C3 | ✅ Complete |
 
 ### `/data/` - Data Infrastructure
 
@@ -247,13 +270,13 @@ Each placeholder cycle includes:
 
 | Metric | Count |
 |--------|-------|
-| Total files | 130+ |
-| Complete content files | 32 |
+| Total files | 150+ |
+| Complete content files | 50+ |
 | Placeholder files | 90+ |
 | Template files | 9 |
 | Configuration files | 10 |
 | Infrastructure files | 12 |
-| Active cycles | 1 (C3) |
+| Complete cycles | 2 (C2, C3) |
 | In-progress cycles | 1 (C4) |
 | Placeholder cycles | 6 (C5-C10) |
 
